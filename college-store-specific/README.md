@@ -6,6 +6,8 @@ This directory houses data and assets that are unique to the KCTCS StoreConnect 
 
 Each college has its own subdirectory for organizing assets, along with a `kctcs` folder for resources shared with the main KCTCS site.
 
+Every store folder includes a `Head Content Block` subfolder where you can place the head content specific to that storefront (for example, Salesforce CMS exports or reusable snippets).
+
 - `kctcs`
 - `ashland-community-and-technical-college`
 - `big-sandy-community-and-technical-college`
