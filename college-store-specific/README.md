@@ -27,3 +27,4 @@ Every store folder includes an `HTML Head Content Block` subfolder where you can
 - `west-kentucky-community-and-technical-college`
 
 Add additional files or folders inside each location as needed to support the respective storefront.
+This directory houses data and assets that are unique to the KCTCS StoreConnect implementation. Use this space to store configuration files, content, and other resources that are specific to the KCTCS college store.
