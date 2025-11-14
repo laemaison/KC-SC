@@ -1,0 +1,174 @@
+(function() {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    const registrationForm = document.getElementById('registration-form');
+    const customForm = document.querySelector('form[action="/bluegrass/form_submission"]');
+    const registrationSubmitBtn = document.getElementById('submit-button');
+    const customFormSubmitBtn = customForm ? customForm.querySelector('input[type="submit"]') : null;
+    
+    if (!registrationForm || !customForm || !registrationSubmitBtn || !customFormSubmitBtn) {
+      console.error('Required forms or buttons not found');
+      return;
+    }
+
+    // Hide the custom form's submit button
+    customFormSubmitBtn.style.display = 'none';
+
+    // Auto-populate hidden fields
+    setupAutoPopulation();
+
+    // Track submission state
+    let isSubmitting = false;
+
+    // Define the handler function so we can reference it
+    function handleSubmit(e) {
+      if (isSubmitting) return;
+      
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Validate both forms
+      const registrationValid = validateForm(registrationForm);
+      const customValid = validateForm(customForm);
+      
+      if (!registrationValid || !customValid) {
+        scrollToFirstError();
+        return;
+      }
+
+      // Set flag to prevent double submission
+      isSubmitting = true;
+      
+      // Disable the registration button
+      registrationSubmitBtn.disabled = true;
+      registrationSubmitBtn.value = 'Processing...';
+
+      // Submit both forms via fetch to control the redirect
+      submitBothForms();
+    }
+
+    // Attach the handler
+    registrationForm.addEventListener('submit', handleSubmit);
+
+    // Submit both forms sequentially using fetch
+    async function submitBothForms() {
+      try {
+        // Submit registration form
+        const registrationData = new FormData(registrationForm);
+        const registrationResponse = await fetch(registrationForm.action, {
+          method: 'POST',
+          body: registrationData,
+          credentials: 'same-origin'
+        });
+
+        if (!registrationResponse.ok) {
+          throw new Error('Registration submission failed');
+        }
+
+        // Submit custom form
+        const customFormData = new FormData(customForm);
+        await fetch(customForm.action, {
+          method: 'POST',
+          body: customFormData,
+          credentials: 'same-origin'
+        });
+
+        // Both forms submitted successfully - redirect
+        window.location.href = {{ current_store.url }} + '/auth/confirmation/pending';
+        
+      } catch (error) {
+        console.error('Submission error:', error);
+        alert('There was an error submitting your registration. Please try again.');
+        
+        // Re-enable the button
+        registrationSubmitBtn.disabled = false;
+        registrationSubmitBtn.value = 'Register';
+        isSubmitting = false;
+      }
+    }
+
+    // Auto-populate hidden email and last name fields
+    function setupAutoPopulation() {
+      const emailField = document.getElementById('email__register');
+      const emailHiddenField = document.querySelector('input[name="answers[a0xbc000001kYCbAAM][answer]"]');
+      
+      if (emailField && emailHiddenField) {
+        const syncEmail = () => emailHiddenField.value = emailField.value;
+        emailField.addEventListener('input', syncEmail);
+        emailField.addEventListener('blur', syncEmail);
+      }
+
+      const lastnameField = document.getElementById('lastname__register');
+      const lastnameHiddenField = document.querySelector('input[name="answers[a0xbc000001kYEDAA2][answer]"]');
+      
+      if (lastnameField && lastnameHiddenField) {
+        const syncLastname = () => lastnameHiddenField.value = lastnameField.value;
+        lastnameField.addEventListener('input', syncLastname);
+        lastnameField.addEventListener('blur', syncLastname);
+      }
+    }
+
+    // Form validation
+    function validateForm(form) {
+      const requiredFields = form.querySelectorAll('[required]');
+      let isValid = true;
+
+      requiredFields.forEach(field => {
+        const fieldContainer = field.closest('.SC-Field') || field.closest('section');
+        const errorSpan = fieldContainer ? fieldContainer.querySelector('.SC-Field_error') : null;
+        
+        if (!field.value || !field.value.trim()) {
+          isValid = false;
+          field.classList.add('SC-Field_input--error');
+          field.style.borderColor = '#ff0040';
+          if (errorSpan) {
+            errorSpan.textContent = 'This field is required';
+            errorSpan.style.display = 'block';
+            errorSpan.style.color = '#ff0040';
+          }
+        } else {
+          field.classList.remove('SC-Field_input--error');
+          field.style.borderColor = '';
+          if (errorSpan) {
+            errorSpan.textContent = '';
+            errorSpan.style.display = 'none';
+          }
+        }
+      });
+
+      // Email validation
+      const emailField = form.querySelector('input[type="email"]');
+      if (emailField && emailField.value) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const fieldContainer = emailField.closest('.SC-Field');
+        const errorSpan = fieldContainer ? fieldContainer.querySelector('.SC-Field_error') : null;
+        
+        if (!emailPattern.test(emailField.value)) {
+          isValid = false;
+          emailField.classList.add('SC-Field_input--error');
+          emailField.style.borderColor = '#ff0040';
+          if (errorSpan) {
+            errorSpan.textContent = 'Please enter a valid email address';
+            errorSpan.style.display = 'block';
+            errorSpan.style.color = '#ff0040';
+          }
+        }
+      }
+
+      return isValid;
+    }
+
+    // Scroll to first error
+    function scrollToFirstError() {
+      const firstError = document.querySelector('.SC-Field_input--error');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => firstError.focus(), 300);
+      }
+    }
+
+  });
+
+})();
