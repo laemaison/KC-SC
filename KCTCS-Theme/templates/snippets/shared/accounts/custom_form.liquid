@@ -1,0 +1,8 @@
+{%- default form: nil %}
+
+{% assign custom_form = form %}
+
+{% form 'custom-form', identifier: custom_form.id %}
+    {% render 'custom_forms/questions', questions: custom_form.questions, form: form %}
+    <input type="submit" value="Submit" class="SC-Button SC-Button-add sc-grow" />
+{% endform %}

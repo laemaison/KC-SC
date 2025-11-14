@@ -1,0 +1,56 @@
+{%- cache "footer", items: [current_store, current_customer, current_privacy] -%}
+  {%- if current_store.footer != blank %}
+    {{ current_store.footer.render }}
+  {%- else %}
+<footer class="SC-Footer sc-flex-col sc-gap-large sc-border-top sc-border-thick sc-border-color-gray sc-overflow-hidden sc-shadow" id="SC-Footer">
+
+      <!-- Footer Logo -->
+      <div class="sc-flex sc-justify-center">
+        <div class="SC-Logo">
+          {% assign footer_logo_id = current_store.data['Footer_Image__c'] | default: blank %}
+          {% if all_media[footer_logo_id] != blank %}
+            <img class="SC-Logo_image"
+                 src="{{ all_media[footer_logo_id].url }}"
+                 alt="{{ all_media[footer_logo_id].alt_text }}">
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Contact Block -->
+      <div class="sc-text-center">
+        <span class="sc-font-bold sc-color-text">
+          Workforce Solutions | {{ store_variables['footer.contact_block'] }}
+        </span>
+      </div>
+
+      <!-- Main Footer Menu (Request Information) -->
+      {%- if current_store.footer_menu != blank %}
+        {{ current_store.footer_menu.render }}
+      {%- endif %}
+
+      <!-- Social Menu -->
+      {% assign social_menu_key = current_store.data['Social_Menu__c'] | default: blank %}
+      {% if all_menus[social_menu_key] != blank %}
+        <div class="sc-flex sc-justify-center sc-gap-large social-media-menu-items">
+          {{ all_menus[social_menu_key].render }}
+        </div>
+      {% endif %}
+
+      <!-- Privacy & Terms Link -->
+      {% assign privacy_url = store_variables['footer.privacyandterms'] | default: blank %}
+      {% if privacy_url != blank %}
+        <div class="sc-text-center">
+          <a href="{{ privacy_url }}" class="sc-link">
+            Privacy & Terms
+          </a>
+        </div>
+      {% endif %}
+
+    </footer>
+
+    <!-- Legal Section -->
+    <div class="sc-bg-primary sc-expand sc-shade-lightest sc-ps sc-pe sc-text-center">
+      &copy; {{ current_store.name | default: "StoreConnect" }} {{ current_store.timezone | now | date: "%Y" }}
+    </div>
+  {%- endif %}
+{%- endcache %}

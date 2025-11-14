@@ -1,0 +1,10 @@
+{%- default class: "SC-Button SC-Button-primary sc-button" -%}
+
+{%- assign btn_txt = "Sign Up"%}
+{%- if current_cart.quotable? %}
+{%- assign btn_txt = "cart.buttons.request_quote" | t %}
+{%- endif %}
+
+<a href="{{ current_store.url }}/accounts/register" data-sc-checkout-btn class="{{ class }}">
+{{ btn_txt }}
+</a>

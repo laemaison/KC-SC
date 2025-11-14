@@ -1,0 +1,8 @@
+{% assign content_block_template = content_block.template %}
+{% if content_block_template == blank %}
+  {% assign content_block_template = 'blocks/text' %}
+{% endif %}
+
+<div id="SC-ContentBlock-{{ content_block.identifier }}" class="SC-ContentBlockContainer_body">
+  {% render content_block_template, content_block: content_block %}
+</div>

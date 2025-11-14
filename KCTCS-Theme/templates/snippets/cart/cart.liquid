@@ -1,0 +1,46 @@
+{%- if current_cart != blank and current_cart.items.size > 0 %}
+  <div class="sc-flex-col-to-row sc-gap-xlarge">
+    {%- form "cart", data-submit-on-change: true, data-sc-cart: blank, remote: true, class:"sc-grow" %}
+      {%- comment %} Products {% endcomment %}
+      {%- render "shared/cart/items", source: current_cart, extended: true, width: "80px" %}
+      <section class="SC-Grid">
+        <div class="SC-Grid_main">
+          <div class="u-text-align-center-up-to-medium">
+            <a href="{{ current_store.cart_path }}" data-method="delete" class="SC-Link">{{ "cart.links.clear_cart" | t }}</a>
+          </div>
+        </div>
+        <aside class="SC-Grid_summary">
+          <div class="sc-mb" data-cart-summary>
+          {%- render "shared/order_total", source: current_cart %}
+          </div>
+          {%- if current_customer != blank %}
+            {% render "shared/cart/checkout_button" %}
+          {%- endif %}
+        </aside>
+      </section>
+    {%- endform %}
+
+    {%- if current_customer == blank %}
+      <div class="sc-flex-col sc-gap-large sc-shadow-2 sc-p-base sc-one-third-medium-and-up">
+        <div>
+        <p><strong>{{ "cart.modal.login_title" | t }}</strong></p>
+        {%- render "shared/cart/register_button" %}
+        </div>
+
+        {%- default only_sso_provider: null -%}
+
+        <div class="sc-mt">
+          <h3>{{ "auth.login.heading" | t }}</h3>
+          {% assign block = current_store.id | append: "-login-introduction" %}
+          {{ all_content_blocks[block] | try: "render" }}
+          {% render "account/login/form", focus: true, only_sso_provider: only_sso_provider %}
+        </div>
+      {%- endif %}
+    </div>
+  </div>
+{%- else %}
+  <p>{{ "cart.empty_msg" | t }}</p>
+  <p>
+    <a href="{{ current_store.home_path }}" class="SC-Link">{{ "cart.links.continue_shopping" | t }}</a>
+  </p>
+{%- endif %}
