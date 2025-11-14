@@ -1,16 +1,19 @@
 /* ===================================================== */
 /* KCTCS Main Site - Store Style Block CSS */
-/* Cleaned and optimized version 10.3.2025 */ 
+/* Cleaned and optimized version */
+/* Last Updated: November 2025 */ 
+/* ===================================================== */
+/* NOTE: Global styles are in theme-supplement.css */
+/* This file contains ONLY main site-specific styles */
 /* ===================================================== */
 
-/* ===================================================== */
-/* Global Element Hiding */
-/* ===================================================== */
-#SC-PreFooter {
-  display: none !important;
-}
 
-/* Hide unused header icons and elements */
+/* ===================================================== */
+/* 1. HEADER CUSTOMIZATION - Main Site Only */
+/* Hides e-commerce elements and centers logo */
+/* ===================================================== */
+
+/* Hide e-commerce functionality not needed on main site */
 #SC-GlobalSearch,
 #SC-HeaderMenuSecondary .SC-Menu_item:first-child,
 #SC-HeaderMenuSecondary .SC-Menu_item[data-cart-menu],
@@ -28,219 +31,56 @@
   display: none !important;
 }
 
+/* Desktop: Center logo in header */
+@media screen and (min-width: 768px) {
+  .SC-Header_inner_left {
+    flex: 1 1 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
 
-/* ===================================================== */
-/* Header Styles */
-/* ===================================================== */
+  .SC-Header_inner_center {
+    justify-content: center !important;
+    text-align: center !important;
+    flex: 1 !important;
+  }
 
-/* Center logo on desktop */
-.SC-Header_inner_left,
-.SC-Header_inner_center {
-  justify-content: center !important;
-  text-align: center !important;
-  flex: 1 !important;
+  .SC-Header_inner_right { 
+    display: none !important; 
+  }
 }
 
-.SC-Header_inner_right { 
-  display: none !important; 
-}
-
+/* Center navigation bar items */
 .SC-Navbar_inner { 
   justify-content: center !important; 
 }
 
-/* Logo hover effect */
-.SC-Header .SC-Logo { 
-  transition: all .2s ease-in-out; 
-}
+/* Mobile: Left-align hamburger with logo */
+@media screen and (max-width: 767px) {
+  .SC-Header_inner_left {
+    flex: 1 1 100% !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center;
+  }
 
-.SC-Header .SC-Logo:hover { 
-  transform: scale(1.05); 
-}
+  .SC-Header_toggle {
+    margin-right: 1rem;
+  }
 
-/* Logo sizing */
-.SC-Logo_image {
-  height: auto;
-  max-height: 100px;
-  max-width: 150px;
-  width: auto;
-}
-
-@media only screen and (min-width: 768px) {
-  .Logo_image, .SC-Logo_image {
-    max-height: 100px;
-    max-width: 150px;
+  /* Larger logo on mobile */
+  .SC-Logo_image {
+    max-height: 80px;
+    max-width: 200px;
+    width: auto;
+    height: auto;
   }
 }
 
 
 /* ===================================================== */
-/* Hero Video Banner Styles */
-/* ===================================================== */
-
-/* Desktop: Banner overlay positioning */
-.SC-Banner_container.sc-left {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  transform: translateX(5%);
-  bottom: 3rem;
-  left: 3rem;
-  position: absolute;
-  z-index: 2;
-}
-
-/* Banner overlay for video backgrounds */
-.SC-Banner:has(video) .SC-Banner_container {
-  position: absolute;
-  bottom: 3rem;
-  left: 3rem;
-  z-index: 2;
-}
-
-.SC-Banner:has(video) .SC-Banner_heading {
-  font-size: 3.25rem;
-  font-weight: 800;
-  color: white !important;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 4px solid #e7a514;
-}
-
-.SC-Banner:has(video) .SC-Banner_subheading {
-  color: white !important;
-}
-
-/* Fade-in animation for hero content */
-.SC-Banner:has(video) .SC-Banner_content {
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeInUp 1.2s ease-out 0.3s forwards;
-  align-self: unset !important;
-}
-
-/* Animation keyframes */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  60% {
-    opacity: 0.8;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-/* ===================================================== */
-/* CTA Button Styles (Hero, Footer, etc.) */
-/* ===================================================== */
-
-/* Base button setup */
-.sc-button,
-.SC-Button-primary,
-.SC-Banner_cta {
-  position: relative;
-  z-index: 1;
-}
-
-/* Hero CTA button */
-.SC-Banner_cta {
-  background-color: var(--blue, #00467f) !important;
-  border: 0.125rem solid var(--blue, #00467f) !important;
-  border-radius: 6px !important;
-  color: var(--white, #ffffff) !important;
-  font-size: 1.125rem !important;
-  font-weight: 700 !important;
-  line-height: 1.55 !important;
-  padding: 0.78125rem 2rem !important;
-  text-align: center;
-  text-decoration: none !important;
-  display: inline-block !important;
-  width: 18.75rem !important;
-  overflow: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease-out !important;
-}
-
-.SC-Banner_cta:hover,
-.SC-Banner_cta:focus {
-  background-color: var(--white, #ffffff) !important;
-  color: var(--blue, #00467f) !important;
-  border-color: var(--blue, #00467f) !important;
-  box-shadow: 0 0 10px rgba(231, 166, 20, 0.5);
-}
-
-/* Glow effect for all buttons on hover */
-.sc-button:hover,
-.SC-Button-primary:hover,
-.SC-Banner_cta:hover {
-  box-shadow: 0 0 14px rgba(231, 166, 20, 0.75);
-  transition: box-shadow 0.3s ease-out;
-}
-
-
-/* ===================================================== */
-/* About Us Section — Image Beside Text */
-/* ===================================================== */
-#SC-ContentBlockContainer-kctcs-home-about-us {
-  padding: var(--sc-spacing-large) var(--sc-spacing-base);
-  background-color: var(--sc-shade-lightest);
-}
-
-#SC-ContentBlock-kctcs-home-image-besides-text {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: var(--sc-max-width);
-  margin: 0 auto;
-  gap: var(--sc-spacing-large);
-}
-
-#SC-ContentBlock-kctcs-home-image-besides-text .SC-ImageBesideText_image {
-  flex: 1 1 40%;
-  max-width: 500px;
-  border-radius: var(--sc-border-radius);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#SC-ContentBlock-kctcs-home-image-besides-text .SC-ImageBesideText_image:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 14px rgba(231, 166, 20, 0.75);
-}
-
-#SC-ContentBlock-kctcs-home-image-besides-text .SC-ImageBesideText_content {
-  flex: 1 1 55%;
-}
-
-#SC-ContentBlock-kctcs-home-image-besides-text .sc-rich-text p {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: var(--sc-shade-darkest);
-  margin-bottom: var(--sc-spacing-base);
-}
-
-/* Link styling with animated underline */
-#SC-ContentBlock-kctcs-home-image-besides-text .sc-rich-text a {
-  font-weight: 600;
-  color: var(--sc-color-primary);
-  text-decoration: none;
-  border-bottom: 1px solid var(--sc-color-primary);
-  transition: border-bottom-width 0.2s ease;
-}
-
-#SC-ContentBlock-kctcs-home-image-besides-text .sc-rich-text a:hover,
-#SC-ContentBlock-kctcs-home-image-besides-text .sc-rich-text a:focus {
-  border-bottom-width: 3px;
-}
-
-
-/* ===================================================== */
-/* Interactive Map — KCTCS Main Site */
+/* 2. INTERACTIVE MAP – KCTCS Main Site */
+/* Kentucky map with clickable college location pins */
 /* ===================================================== */
 
 /* Map wrapper responsive sizing */
@@ -255,8 +95,9 @@
   } 
 }
 
-/* Map section heading */
-#SC-ContentBlockContainer-kctcs-interactive-map-container .SC-ContentBlockContainer_header h2 {
+/* Map and college list section headers - consolidated */
+#SC-ContentBlockContainer-kctcs-interactive-map-container .SC-ContentBlockContainer_header h2,
+#SC-ContentBlockContainer-kctcs-home-colleges-list .SC-ContentBlockContainer_header h2 {
   text-align: center !important;
   margin-left: auto;
   margin-right: auto;
@@ -292,7 +133,8 @@
 
 
 /* ===================================================== */
-/* College Directory Tiles */
+/* 3. COLLEGE DIRECTORY TILES */
+/* Responsive grid of all 16 KCTCS colleges */
 /* ===================================================== */
 
 /* Container styling */
@@ -302,7 +144,7 @@
   border-radius: 8px;
 }
 
-/* Grid setup — responsive columns */
+/* Grid setup – responsive columns */
 .college-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -368,11 +210,19 @@
   transform: translateY(-2px);
 }
 
-/* College name heading — responsive sizing */
+/* College name heading – responsive sizing */
 .college-card .college-name {
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   line-height: 1.2;
   margin: 0;
+}
+
+/* Desktop: Uniform heading size for equal card heights */
+@media screen and (min-width: 768px) {
+  #SC-ContentBlockContainer-kctcs-home-colleges-list .college-card h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
 }
 
 /* Horizontal rule separator */
@@ -426,7 +276,7 @@
   display: inline-block;
 }
 
-/* CTA button — "Explore Classes" */
+/* CTA button – "Explore Classes" */
 .cta-outline {
   display: inline-flex;
   align-items: center;
@@ -484,162 +334,80 @@
 
 
 /* ===================================================== */
-/* Footer Styles */
+/* 4. ABOUT US SECTION – Image Beside Text */
 /* ===================================================== */
 
-.sc-bg-primary {
-  background-color: var(--sc-color-primary);
+#SC-ContentBlockContainer-kctcs-home-about-us {
+  padding: var(--sc-spacing-large) var(--sc-spacing-base);
+  background-color: var(--sc-shade-lightest);
 }
 
-.Menu_image img, .SC-Menu_image img {
-  width: 32px;
-  height: 32px;
+#SC-ContentBlock-kctcs-home-image-besides-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: var(--sc-max-width);
+  margin: 0 auto;
+  gap: var(--sc-spacing-large);
 }
 
-.SC-Menu_item {
-  text-align: center;
+#SC-ContentBlock-kctcs-home-image-besides-text .SC-ImageBesideText_image {
+  flex: 1 1 40%;
+  max-width: 500px;
+  border-radius: var(--sc-border-radius);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.SC-Menu.tier1 {
-  column-gap: 0px;
-}
-
-.SC-Menu_image {
-  padding: 0px 10px;
-}
-
-.SC-Logo {
-  padding: 0px;
-}
-
-/* Hide social media link text (show icons only) */
-.social-media-menu-items ul li a.SC-Menu_link {
-  display: none;
-}
-
-/* Remove background on social icon hover */
-.SC-Menu_image:hover:after {
-  background-color: transparent;
-}
-
-/* Footer CTA button styling */
-.footer-cta-button > .SC-Menu_link {
-  background-color: var(--blue, #00467f);
-  border: 0.125rem solid var(--blue, #00467f);
-  border-radius: 6px;
-  color: var(--white, #ffffff);
-  font-size: 1.125rem;
-  font-weight: 700;
-  line-height: 1.55;
-  padding: 0.78125rem 2rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  width: 18.75rem;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.footer-cta-button > .SC-Menu_link:hover,
-.footer-cta-button > .SC-Menu_link:focus {
-  background-color: var(--white, #ffffff);
-  color: var(--blue, #00467f);
-  border-color: var(--blue, #00467f);
+#SC-ContentBlock-kctcs-home-image-besides-text .SC-ImageBesideText_image:hover {
+  transform: scale(1.03);
   box-shadow: 0 0 14px rgba(231, 166, 20, 0.75);
 }
 
+#SC-ContentBlock-kctcs-home-image-besides-text .SC-ImageBesideText_content {
+  flex: 1 1 55%;
+}
+
+#SC-ContentBlock-kctcs-home-image-besides-text .sc-rich-text p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--sc-shade-darkest);
+  margin-bottom: var(--sc-spacing-base);
+}
+
+/* Link styling with animated underline */
+#SC-ContentBlock-kctcs-home-image-besides-text .sc-rich-text a {
+  font-weight: 600;
+  color: var(--sc-color-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--sc-color-primary);
+  transition: border-bottom-width 0.2s ease;
+}
+
+#SC-ContentBlock-kctcs-home-image-besides-text .sc-rich-text a:hover,
+#SC-ContentBlock-kctcs-home-image-besides-text .sc-rich-text a:focus {
+  border-bottom-width: 3px;
+}
+
+
 /* ===================================================== */
-/* MOBILE RESPONSIVE STYLES */
+/* 5. MOBILE RESPONSIVE STYLES */
 /* Breakpoint: 767px and below */
 /* ===================================================== */
 
 @media screen and (max-width: 767px) {
   
-  /* ===== Header — Mobile ===== */
+  /* Section headers - map and college list */
+  #SC-ContentBlockContainer-kctcs-interactive-map-container .SC-ContentBlockContainer_header h2,
+  #SC-ContentBlockContainer-kctcs-home-colleges-list .SC-ContentBlockContainer_header h2 {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
   
-  /* Left-align hamburger menu */
-  .SC-Header_inner_left {
-    flex: 1 1 100% !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center;
-  }
-
-  /* Hamburger spacing */
-  .SC-Header_toggle {
-    margin-right: 1rem;
-  }
-
-  /* Increase logo size on mobile */
-  .SC-Logo_image {
-    max-height: 80px;
-    max-width: 200px;
-    width: auto;
-    height: auto;
-  }
-
-  
-  /* ===== Hero Banner — Mobile Override ===== */
-  
-  .SC-Banner {
-    min-height: 65vh !important;
-  }
-
-  /* Mobile: Reposition hero container */
-  .SC-Banner:has(video) .SC-Banner_container {
-    position: absolute;
-    bottom: 2rem;
-    left: 0;
-    z-index: 2;
-  }
-
-  /* Mobile: Center the banner content */
-  .SC-Banner_container.sc-left {
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    transform: none;
-    left: 0;
-    position: absolute;
-  }
-
-  .SC-Banner:has(video) .SC-Banner_content {
-    bottom: 2rem;
-  }
-
-  
-  /* ===== Navigation — Mobile ===== */
-  
-  .SC-Menu.tier1.dropdown {
-    font-weight: 600;
-    font-size: var(--sc-font-small);
-    background-color: hsla(var(--sc-color-secondary-h), var(--sc-color-secondary-s), var(--sc-color-secondary-l), 1);
-    color: white;
-  }
-
-  .SC-Menu_button {
-    padding: .5rem .75rem;
-  }
-
-  /* Remove transform animation on account menu for mobile */
-  ul.SC-Menu.dropdown.is-active[data-nav="account"],
-  ul.SC-Menu.dropdown[data-nav="account"] {
-    transform: none !important;
-    transition: opacity .12s ease !important;
-  }
-
-  
-  /* ===== College Directory Tiles — Mobile ===== */
-  
-  /* Reduce container padding to prevent overflow */
+  /* College Directory Tiles */
   #SC-ContentBlockContainer-kctcs-home-colleges-list {
     padding: 20px 10px;
   }
 
-  /* Reduce card padding on mobile */
   #SC-ContentBlockContainer-kctcs-home-colleges-list .college-card {
     padding: 1rem;
   }
@@ -671,18 +439,8 @@
   .college-card .sc-text-center .cta-outline { 
     width: 100%; 
   }
-
   
-  /* ===== Interactive Map — Mobile ===== */
-  
-  #SC-ContentBlockContainer-kctcs-interactive-map-container .SC-ContentBlockContainer_header h2 {
-    font-size: 1.5rem;
-    padding: 0 1rem;
-  }
-
-  
-  /* ===== About Us Section — Mobile ===== */
-  
+  /* About Us Section */
   #SC-ContentBlock-kctcs-home-image-besides-text {
     flex-direction: column;
   }
@@ -700,101 +458,5 @@
   /* Smaller border radius on mobile images */
   img.SC-ImageBesideText_image {
     border-radius: 4px;
-  }
-
-  
-  /* ===== Footer — Mobile ===== */
-  
-  /* Reduce footer logo size */
-  #SC-Footer .SC-Logo_image {
-    max-height: 120px;
-    max-width: 150px;
-  }
-
-  /* Hide login link in footer on mobile */
-  #SC-Footer .SC-Loginhidefootermobile {
-    display: none;
-  }
-}
-
-
-/* ===================================================== */
-/* DESKTOP RESPONSIVE STYLES */
-/* Breakpoint: 768px and above */
-/* ===================================================== */
-
-@media screen and (min-width: 768px) {
-  
-  /* ===== College Tiles — Desktop ===== */
-  
-  /* Uniform heading size for equal card heights */
-  #SC-ContentBlockContainer-kctcs-home-colleges-list .college-card h2 {
-    font-size: 1.5rem;
-    line-height: 1.3;
-  }
-}
-
-/* ===================================================== */
-/* Header Styles */
-/* ===================================================== */
-
-/* Center logo on desktop */
-.SC-Header_inner_left {
-  justify-content: center !important;
-  text-align: center !important;
-  flex: 1 !important;
-}
-
-.SC-Header_inner_center {
-  justify-content: center !important;
-  text-align: center !important;
-  flex: 1 !important;
-}
-
-.SC-Header_inner_right { 
-  display: none !important; 
-}
-
-.SC-Navbar_inner { 
-  justify-content: center !important; 
-}
-
-/* Desktop: Ensure full width centering */
-@media screen and (min-width: 768px) {
-  .SC-Header_inner_left {
-    flex: 1 1 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
-}
-
-/* ===================================================== */
-/* Uniform Section Headers */
-/* ===================================================== */
-
-/* Map section heading */
-#SC-ContentBlockContainer-kctcs-interactive-map-container .SC-ContentBlockContainer_header h2 {
-  text-align: center !important;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-/* College list section heading - match map styling */
-#SC-ContentBlockContainer-kctcs-home-colleges-list .SC-ContentBlockContainer_header h2 {
-  text-align: center !important;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-/* Mobile adjustments for both headers */
-@media screen and (max-width: 767px) {
-  #SC-ContentBlockContainer-kctcs-interactive-map-container .SC-ContentBlockContainer_header h2,
-  #SC-ContentBlockContainer-kctcs-home-colleges-list .SC-ContentBlockContainer_header h2 {
-    font-size: 1.5rem;
-    padding: 0 1rem;
   }
 }
