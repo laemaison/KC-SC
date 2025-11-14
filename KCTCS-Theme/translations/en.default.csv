@@ -1,0 +1,59 @@
+s_c__Key__c,s_c__Value__c
+accounts.billing.path,billing
+accounts.contact.birthdate,Date of Birth
+accounts.contact.employer,Employer
+accounts.contact.preferred_name,Preferred Name
+accounts.menu.contact,Contact Details
+accounts.menu.credentials,Login Details
+accounts.menu.refunds,Request Refund
+accounts.menu.shipping,Home Address
+accounts.orders.shared.status.enum.canceled,Canceled
+accounts.orders.shared.status.enum.draft,Processing
+accounts.orders.shared.status.enum.refunded,Refunded
+accounts.orders.shared.status.enum.registered,Registered
+accounts.orders.shared.status.enum.registered_paid,Registered
+accounts.orders.shared.status.enum.registered_pending,Registration Pending
+accounts.orders.show.shipping_details,Address information
+accounts.profile.sections.shipping.heading,Home Address
+accounts.register.form.labels.birth,Date of Birth
+accounts.register.form.labels.birth_format,mm-dd-yyyy
+accounts.register.form.labels.employer,Employer
+accounts.register.form.labels.preferred_name,Preferred name
+accounts.register.local_heading,
+accounts.shared.address_form.county,County
+accounts.shipping.heading,Home Address
+accounts.shipping.update,Update your home address
+auth.login.form.submit,Sign In
+auth.login.form.username,Email address
+auth.login.heading,Already have an account? Sign in below.
+auth.login.sso.sign_in_or_register,Sign In
+auth.shared.links.create.account,Create account
+button.waitlist_submit,Join waitlist
+cart.modal.login_title,Don’t have an account? Sign up now.
+checkout.customer_information.billing_address.billing_address_same_as_shipping_address,Same as Home Address
+checkout.customer_information.header,Home Address
+checkout.shipping.click_and_collect.out_of_stock,This class is full.
+checkout.social_security_number.header,Social Security
+field.password_instruction,"Must be at least 8 characters, include 1 uppercase letter, and 1 special character (e.g., ! @ # $ %)"
+footer.contact_label,Contact Us
+header.dropdowns.account.heading,My Profile
+header.dropdowns.account.login,Log In
+header.dropdowns.account.logout,Log Out
+header.dropdowns.account.profile,My Profile
+header.search.placeholder,Search our courses
+product.add_to_cart_text,Enroll Now
+product.buy_it_now_text,Enroll Now
+product.status_label,Course Canceled
+products.index.all_products,All classes
+products.show.discontinued,(Full)
+products.show.select_option,Pick a course session above to begin enrollment.
+SC-Field_input sc-one-whole,Search for classes
+sc.cart.add.errors.out_of_stock,%{name} is full
+sc.cart.update.errors.insufficient_product_stock,The following items you've selected aren't available right now and have been taken out of your cart: %{names}. We're sorry for the inconvenience.
+sc.cart.update.errors.limited_product_stock,Due to class capacity the quantity has been updated for the following items: %{names}.
+sc.product.sc.default_text.buy_it_now,Enroll Now
+sc.products.default_text.hide_price,Enroll Today
+sc.products.default_text.out_of_stock,This class is full.
+sc.products.errors.not_found,That class was not found.
+search.products.filters.in_stock,Spots Available
+shared.product_buttons.add_to_cart,Enroll Now
