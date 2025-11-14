@@ -1,0 +1,23 @@
+{%- default only_sso_provider: null %}
+{%- assign background_image = store_variables['login.background_image'] | default: blank %}
+
+<div class="SC-Banner"{% if background_image != blank %} style="background-image: url({{ all_media[background_image].image.massive_url }});"{% endif %}>
+  <div class="SC-Banner_container">
+    <div class="SC-Banner_content">
+      <div class="sc-container sc-container-capsule sc-container-spacious sc-mt sc-me sc-bg-white sc-border-radius sc-shadow">
+        <h3 class="sc-font-medium sc-font-bold sc-mb">{{ 'cart.modal.login_title' | t }}</h3>
+
+        <div class="sc-mb">
+          {%- render "shared/cart/register_button" %}
+        </div>
+
+        <p class="sc-font-medium sc-font-bold">{{ "auth.login.heading" | t }}</p>
+
+        {% assign block = current_store.id | append: "-login-introduction" %}
+        {{ all_content_blocks[block] | try: "render" }}
+
+        {% render "account/login/form_cart", focus: true, only_sso_provider: only_sso_provider %}
+      </div>
+    </div>
+  </div>
+</div>

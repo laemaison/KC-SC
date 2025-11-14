@@ -1,0 +1,9 @@
+{%- liquid
+before
+if current_customer == nil
+unless current_request.path contains '/auth' or current_request.path contains '/accounts'
+redirect to: current_store.login_path
+endunless
+endif
+endbefore
+-%}

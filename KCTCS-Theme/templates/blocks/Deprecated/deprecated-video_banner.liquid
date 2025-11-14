@@ -1,0 +1,11 @@
+<div id="SC-ContentBlock-{{ content_block.identifier }}" class="video-container sc-pos-relative sc-display-inline-block sc-expand">
+  <video autoplay muted loop playsinline>
+    <source src="{{ content_block.video.url }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay">
+    <h1 class="SC-Banner_heading sc-white">{{ content_block.title }}</h1>
+    <p class="SC-Banner_subheading sc-white">{{ content_block.subtitle }}</p>
+    <a href="{{ content_block.link_target }}" class="SC-Banner_cta">{{ content_block.link_label }}</a>
+  </div>
+</div>

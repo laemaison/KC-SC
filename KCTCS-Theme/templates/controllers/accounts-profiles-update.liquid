@@ -1,0 +1,19 @@
+{% liquid
+after
+if current_request.params.birthdate != blank
+update current_customer, field: "birthdate", value: current_request.params.birthdate
+endif
+
+if current_request.params.preferred_name__c != blank
+update current_customer, field: "preferred_name__c", value: current_request.params.preferred_name__c
+endif
+
+if current_request.params.employer__c != blank
+update current_customer, field: "employer__c", value: current_request.params.employer__c
+endif
+
+if current_request.params.county__c != blank
+update current_customer, field: "county__c", value: current_request.params.county__c
+endif
+endafter
+%}

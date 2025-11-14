@@ -1,0 +1,13 @@
+<div data-sc-cart-page class="SC-Cart">
+  <div class="sc-container {% if current_customer != blank %} sc-container-skinny{% endif %} sc-container-spacious">
+    {%- render "shared/page_header", heading: "t.cart.header" %}
+
+    <div data-cart-page-cart>
+      {%- render "cart/cart" %}
+    </div>
+  </div>
+</div>
+
+{%- if current_customer == blank %}
+{%- render "cart/login_form_modal" %}
+{%- endif %}
