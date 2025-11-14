@@ -56,9 +56,19 @@
 <span class="SC-Field_error"></span>
 </div>
 
+{%- assign today = 'now' | date: '%Y-%m-%d' -%}
 <div class="SC-Field SC-Field-expand required">
 <label for="dob-field" class="SC-Field_label">Date of Birth</label>
-<input type="date" id="dob-field" class="SC-Field_input" name="answers[a0xbc000001kY9NAAU]" value="" required="">
+<input
+  type="date"
+  id="dob-field"
+  class="SC-Field_input"
+  name="answers[a0xbc000001kY9NAAU]"
+  value=""
+  required
+  min="1900-01-01"
+  max="{{ today }}"
+>
 <span class="SC-Field_error"></span>
 </div>
 
@@ -385,6 +395,30 @@ console.log('DOB synced:', dobFieldVisible.value);
 };
 dobFieldVisible.addEventListener('input', syncDOB);
 dobFieldVisible.addEventListener('change', syncDOB);
+}
+
+// ==== Date of Birth Validation ====
+const dobField = document.getElementById('dob-field');
+if (dobField) {
+  // Set custom error message for out-of-range dates
+  dobField.addEventListener('blur', function () {
+    if (this.validity.rangeOverflow) {
+      this.setCustomValidity('Date of birth cannot be in the future.');
+    } else if (this.validity.rangeUnderflow) {
+      this.setCustomValidity('Please enter a date after 1900.');
+    } else if (this.validity.valueMissing) {
+      this.setCustomValidity('Date of birth is required.');
+    } else {
+      this.setCustomValidity('');
+    }
+  });
+  
+  // Also validate on change
+  dobField.addEventListener('change', function () {
+    if (this.validity.rangeOverflow || this.validity.rangeUnderflow) {
+      this.reportValidity(); // Shows the error immediately
+    }
+  });
 }
 
 // Employer field sync (a0xbc000001kY7lAAE)
